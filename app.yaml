@@ -1,0 +1,51 @@
+spec:
+  name: cloud-media-uploader
+  region: fra
+  
+  services:
+    - name: backend
+      github:
+        repo: YOUR_GITHUB_USERNAME/cloud-media-uploader
+        branch: main
+        deploy_on_push: true
+      
+      build_command: ./gradlew clean build -x test
+      run_command: java -jar build/libs/cloud-media-uploader-0.0.1-SNAPSHOT.jar
+      
+      instance_count: 1
+      instance_size_slug: basic-xxs
+      
+      http_port: 8080
+      
+      health_check:
+        http_path: /health
+      
+      envs:
+        # Database Configuration (PostgreSQL Managed Database)
+        - key: DATABASE_URL
+          value: ${db.DATABASE_URL}
+        - key: DATABASE_USERNAME
+          value: ${db.USERNAME}
+        - key: DATABASE_PASSWORD
+          value: ${db.PASSWORD}
+        
+        # DigitalOcean Spaces Configuration
+        - key: DO_SPACES_ACCESS_KEY
+          value: YOUR_SPACES_ACCESS_KEY
+          type: SECRET
+        - key: DO_SPACES_SECRET_KEY
+          value: YOUR_SPACES_SECRET_KEY
+          type: SECRET
+        - key: DO_SPACES_REGION
+          value: fra1
+        - key: DO_SPACES_BUCKET
+          value: your-bucket-name
+        - key: DO_SPACES_ENDPOINT
+          value: https://fra1.digitaloceanspaces.com
+  
+  databases:
+    - name: db
+      engine: PG
+      version: "15"
+      production: false
+      cluster_name: cloud-media-db

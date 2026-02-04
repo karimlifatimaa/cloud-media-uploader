@@ -1,0 +1,125 @@
+{
+  "info": {
+    "name": "Cloud Media Uploader API",
+    "description": "Profile image upload service with DigitalOcean Spaces",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health Check",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/health",
+          "host": ["{{base_url}}"],
+          "path": ["health"]
+        },
+        "description": "Check if the application is running"
+      },
+      "response": []
+    },
+    {
+      "name": "Upload Profile Image",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "formdata",
+          "formdata": [
+            {
+              "key": "file",
+              "type": "file",
+              "src": [],
+              "description": "Profile image file (JPEG, PNG, WebP)"
+            }
+          ]
+        },
+        "url": {
+          "raw": "{{base_url}}/upload",
+          "host": ["{{base_url}}"],
+          "path": ["upload"]
+        },
+        "description": "Upload a profile image to DigitalOcean Spaces"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "formdata",
+              "formdata": [
+                {
+                  "key": "file",
+                  "type": "file",
+                  "src": []
+                }
+              ]
+            },
+            "url": {
+              "raw": "{{base_url}}/upload",
+              "host": ["{{base_url}}"],
+              "path": ["upload"]
+            }
+          },
+          "status": "Created",
+          "code": 201,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "{\n    \"id\": 1,\n    \"fileName\": \"profile.jpg\",\n    \"fileUrl\": \"https://profile-pics-2026.fra1.digitaloceanspaces.com/uuid-here.jpg\",\n    \"contentType\": \"image/jpeg\",\n    \"fileSize\": 245678,\n    \"uploadedAt\": \"2026-02-04T22:44:24\"\n}"
+        }
+      ]
+    },
+    {
+      "name": "Get All Images",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{base_url}}/images",
+          "host": ["{{base_url}}"],
+          "path": ["images"]
+        },
+        "description": "Get list of all uploaded images"
+      },
+      "response": [
+        {
+          "name": "Success Response",
+          "originalRequest": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/images",
+              "host": ["{{base_url}}"],
+              "path": ["images"]
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "_postman_previewlanguage": "json",
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "[\n    {\n        \"id\": 1,\n        \"fileName\": \"profile.jpg\",\n        \"fileUrl\": \"https://profile-pics-2026.fra1.digitaloceanspaces.com/uuid-here.jpg\",\n        \"contentType\": \"image/jpeg\",\n        \"fileSize\": 245678,\n        \"uploadedAt\": \"2026-02-04T22:44:24\"\n    }\n]"
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:8080",
+      "type": "string"
+    }
+  ]
+}
