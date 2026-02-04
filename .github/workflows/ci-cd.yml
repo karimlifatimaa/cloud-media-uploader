@@ -49,5 +49,5 @@ jobs:
       - name: Deploy to App Platform
         uses: digitalocean/app_action@v1.1.5
         with:
-          app_name: cloud-media-uploader
+          app_name: walrus-app
           token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}

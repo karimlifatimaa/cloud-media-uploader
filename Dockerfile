@@ -17,7 +17,7 @@ FROM eclipse-temurin:17-jre-jammy
 WORKDIR /app
 
 # Copy jar from build stage
-COPY --from=build /app/build/libs/*.jar app.jar
+COPY --from=build /app/build/libs/cloud-media-uploader-0.0.1-SNAPSHOT.jar app.jar
 
 # Expose port
 EXPOSE 8080
