@@ -31,6 +31,7 @@ public class StorageService {
     @Value("${upload.allowed-types}")
     private String allowedTypes;
 
+
     public String uploadFile(MultipartFile file) throws IOException {
         // Validate file
         validateFile(file);
