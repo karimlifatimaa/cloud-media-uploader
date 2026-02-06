@@ -30,7 +30,7 @@ public class GlobalExceptionHandler {
 
         ErrorResponse error = new ErrorResponse(
                 "FILE_TOO_LARGE",
-                "File size exceeds maximum allowed size (10MB)",
+                "File size exceeds maximum allowed size (3GB)",
                 System.currentTimeMillis());
 
         return ResponseEntity.status(HttpStatus.PAYLOAD_TOO_LARGE).body(error);
